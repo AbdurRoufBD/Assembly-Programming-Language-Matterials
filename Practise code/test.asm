@@ -1,0 +1,34 @@
+.MODEL SMALL
+.STACK 100H
+.DATA
+VHAR1 DB ?
+.CODE
+MAIN PROC
+    ;INITIALIZE
+            
+    MOV DX,@DATA
+    MOV DS,DX 
+    
+    ;DISPLAY MESSAGE  
+    MOV AH,2
+    MOV DL,5
+    INT 21H
+    MOV AH,1
+    INT 21H
+    
+    ;MOVE TO VARIABLE
+    MOV VHAR1,AL
+    
+    ADD VHAR1,2
+    
+    MOV DL,VHAR1
+    MOV AH,2
+    INT 21H
+    
+    MOV AH,4CH
+    INT 21H
+    MAIN ENDP
+END MAIN
+
+
+
