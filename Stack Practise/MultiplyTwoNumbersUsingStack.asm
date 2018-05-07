@@ -1,0 +1,34 @@
+.MODEL SMALL
+.STACK 100H
+.CODE
+MAIN PROC
+    MOV AX,000FH
+    MOV BX,0013H 
+    CALL MULTIPLY
+    EXIT : 
+    MOV AH,4CH
+    INT 21H
+    MAIN ENDP
+MULTIPLY PROC
+    PUSH AX
+    PUSH BX
+    
+    XOR DX,DX
+    
+   REPEAT:
+    TEST BX,1
+    JZ SHIFTSTATE
+    ADD DX,AX
+    SHIFTSTATE:
+    SHL AX,1
+    SHR BX,1
+    
+    JNZ REPEAT
+    
+    POP BX
+    POP AX
+    
+    RET
+    
+    MULTIPLY ENDP
+END MAIN
